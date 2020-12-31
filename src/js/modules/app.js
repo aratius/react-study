@@ -1,14 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux' 
+
+import Message from './message'
+import Button from './button'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.children);
   }
   
   render () {
     return (
-      <div>hello</div>
+      <div>
+        <h1>Redux</h1>
+        <Message />
+        <Button />
+      </div>
     )
   }
 }
+
+//ストアのコネクト
+App = connect()(App);

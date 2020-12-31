@@ -8,11 +8,12 @@ import App from './modules/app'
 //ステートの値
 let state_value = {
   counter: 0,
-  message: 'hello'
+  message: 'count'
 }
 
 //レデューサー
 function counter(state = state_value, action) {
+  console.log(state_value);
   switch (action.type) {
     case 'INCREMENT':
       return {
