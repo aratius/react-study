@@ -6,29 +6,29 @@ class Memo extends React.Component {
   render () {
     let data;
     let n = 0;
-    switch (this.props.name) {
+    switch (this.props.mode) {
       case 'default':
-        data = this.props.data.map((value) => {
+        data = this.props.data.map((value) => (
           <Item key={value.message} value={value} index={n++} />
-        })
+        ))
         break;
 
       case 'find':
-        data = this.props.data.map((value) => {
+        data = this.props.fdata.map((value) => (
           <Item key={value.message} value={value} index={n++} />
-        })
+        ))
         break;
 
       case 'delete':
-        data = this.props.data.map((value) => {
+        data = this.props.data.map((value) => (
           <Item key={value.message} value={value} index={n++} />
-        })
+        ))
         break;
 
       default:
-        data = this.props.data.map((value) => {
+        data = this.props.data.map((value) => (
           <Item key={value.message} value={value} index={n++} />
-        })
+        ))
     }
     return (
       <table><tbody>{data}</tbody></table>
