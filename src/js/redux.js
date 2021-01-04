@@ -2,46 +2,35 @@
 https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573
  */
 
- import { combineReducers, createStore } from 'redux'
+ import { applyMiddleware, createStore } from 'redux'
 
  //reducer
- const userReducer = (state = {}, action)=> {
+ const reducer = (state = 0, action)=> {
    switch(action.type) {
-      case "CHANGE_NAME":
-        state = {...state, name: action.payload};
+      case "INC":
+        state += 1;
         break;
-      case "CHANGE_AGE":
-        state = {...state, age: action.payload};
+      case "DEC":
+        state -= 1;
         break;
    }
    return state;
  }
 
- const tweetsReducer = (state = [], action)=> {
-   switch(action.type) {
-      case "ADD_TWEET":
-        state = state.concat({id: Date.now(), text: action.payload});
-   }
-   return state;
+ const logger = (store) => (next) => (action) => {
+   console.log("action fired", action);
+   next(action);  //Reducerにバトンパス
  }
+ const middleware = applyMiddleware(logger);
 
- //複数Reducerを統合
- const reducers = combineReducers({
-   user: userReducer,
-   tweets: tweetsReducer
- })
- 
  //初期値を設定するためにReducerを最初に一回呼び出す
- const store = createStore(reducers);
+ const store = createStore(reducer, 1, middleware);  //middlewareは第三引数に指定する
 
 //storeに変更があった時に呼ばれる？
  store.subscribe(()=> {
    console.log("store changed", store.getState());
  })
 
- //user
- store.dispatch({type: "CHANGE_NAME", payload: "ARATA"})
- store.dispatch({type: "CHANGE_AGE", payload: 20})
-
-//tweet
-store.dispatch({type: "ADD_TWEET", payload: "HELLO ARATA"})
+ window.onclick = ()=>{
+   store.dispatch({type: "INC"})
+ }
