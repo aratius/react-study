@@ -14,4 +14,10 @@ https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573
  const middleware = applyMiddleware(createLogger());
  const store = createStore(reducer, middleware);
 
- store.dispatch({type: "FOO"});
+ store.dispatch((dispatch) => {
+   dispatch({type: "FOO"});
+   //do something async
+   dispatch({type: "BAR"});
+ })
+
+ 
