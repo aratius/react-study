@@ -17,9 +17,9 @@ https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573
 
  const reducer = (state = initalState, action)=> {
    switch(action.type) {
-    case "FETCH_USERS_START":
+    case "FETCH_USERS_START":  //処理中
       return {...state, fetching: true};
-    case "RECIEVE_USERS":
+    case "RECIEVE_USERS":  //処理完了
       return {...state, fetching: false, fetched: true, users: action.payload};
     case "FETCH_USERS_ERROR":
       return {...state, fetching: false, error: action.payload};
