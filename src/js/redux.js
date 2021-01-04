@@ -13,15 +13,27 @@ https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573
       case "DEC":
         state -= 1;
         break;
+      case "ERR":
+        throw new Error("It's error");
    }
    return state;
  }
 
  const logger = (store) => (next) => (action) => {
    console.log("action fired", action);
-   next(action);  //Reducerにバトンパス
+   next(action);  //Reducerにバトンパス 
  }
- const middleware = applyMiddleware(logger);
+
+ const error = (store) => (next) => (action) => {
+   try {
+     next(action);
+   } catch (e) {
+     console.log("Error was occured", e);
+   }
+  //  next(action);
+ }
+
+ const middleware = applyMiddleware(logger, error);
 
  //初期値を設定するためにReducerを最初に一回呼び出す
  const store = createStore(reducer, 1, middleware);  //middlewareは第三引数に指定する
@@ -31,6 +43,5 @@ https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573
    console.log("store changed", store.getState());
  })
 
- window.onclick = ()=>{
-   store.dispatch({type: "INC"})
- }
+ store.dispatch({type: "INC"});
+ store.dispatch({type: "ERR"});
