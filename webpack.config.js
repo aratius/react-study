@@ -4,7 +4,7 @@ var path    = require('path');
 
 module.exports = {
   context: path.join(__dirname, "src"),
-  entry: "./js/redux.js",
+  entry: "./js/movie.js",
   module: {
     rules: [{
       test: /\.jsx?$/,
