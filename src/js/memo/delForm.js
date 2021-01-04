@@ -20,8 +20,11 @@ class DelForm extends React.Component {
   }
 
   doAction(e) {
+    //このイベントが持つデフォルトの動作をキャンセル
     e.preventDefault()
+    //アクションを作成
     let action = deleteMemo(this.state.number)
+    //Reducerにdispatch
     this.props.dispatch(action)
     this.setState({
       number: 0
@@ -30,6 +33,7 @@ class DelForm extends React.Component {
   
   render () {
     let n = 0
+    //繰り返し要素を作成するときはkey属性が必要
     let items = this.props.data.map((value) => (
       <option key={n} value={n++}>{value.message.substring(0, 10)}</option>
     ))

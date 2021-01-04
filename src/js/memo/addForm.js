@@ -21,7 +21,9 @@ class AddForm extends React.Component {
   
   doAction(e) {
     e.preventDefault();
+    //アクションを作成
     let action = addMemo(this.state.message);
+    //アクションを引数にReducerのdispatchを実行
     this.props.dispatch(action);
     this.setState({
       message: ''

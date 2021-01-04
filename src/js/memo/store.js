@@ -9,6 +9,7 @@ const initData = {
 
 
 //Reducer
+//Reducer内で最終的にreturnしたものが新しいステートになる？
 export function memoReducer(state = initData, action) {
   switch (action.type) {
     case 'ADD':
@@ -47,6 +48,7 @@ function findReduce(state, action) {
   let f = action.find;
   let fdata = []
   state.data.forEach((value) => {
+    //文字が一致するものがあればfdata配列に格納(元に戻れなくなるのでdataは汚染しない)
     if (value.message.indexOf(f) >= 0) {
       fdata.push(value);
     }

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from 'react-redux'
-import App from './modules/app'
-import MemoStore from './modules/store'
+import App from './memo/app'
+import MemoStore from './memo/store'
 
 //表示をレンダリング
 ReactDOM.render(
