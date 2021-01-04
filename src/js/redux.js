@@ -8,14 +8,21 @@ https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573
  import axios from 'axios'
 
  //reducer
- const reducer = (state = 0, action)=> {
+ const initalState = {
+   fetching: false, 
+   fetched: false,
+   users: [],
+   error: null
+ }
+
+ const reducer = (state = initalState, action)=> {
    switch(action.type) {
     case "FETCH_USERS_START":
-      break;
+      return {...state, fetching: true};
     case "RECIEVE_USERS":
-      break
+      return {...state, fetching: false, fetched: true, users: action.payload};
     case "FETCH_USERS_ERROR":
-      break;
+      return {...state, fetching: false, error: action.payload};
    }
    return state;
  }
